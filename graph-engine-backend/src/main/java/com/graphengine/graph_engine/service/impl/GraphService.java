@@ -30,7 +30,7 @@ public class GraphService {
     private final NodeRepository nodeRepository;
     private final EdgeRepository edgeRepository;
 
-    public GraphDto createGrapth(CreateGraphDto createGraphDto) {
+    public GraphDto createGraph(CreateGraphDto createGraphDto) {
         Graph graph = Graph.builder()
                 .name(createGraphDto.getName())
                 .description(createGraphDto.getDescription())
@@ -50,10 +50,10 @@ public class GraphService {
         return mapToGraphDto(graph);
     }
 
-    public GraphDto getGraphDetail(Long id) {
+    public GraphDetailDto getGraphDetail(Long id) {
         Graph graph = graphRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Graph not found with id: " + id));
-        return mapToGraphDto(graph);
+        return mapToGraphDetailDto(graph);
     }
 
     public List<GraphDto> getAllGraphs() {
@@ -107,7 +107,7 @@ public class GraphService {
 
     }
 
-    public void deleteNode(Long graphId, Long nodeId) {
+    public void deleteNode(Long nodeId) {
         Node node = nodeRepository.findById(nodeId)
                 .orElseThrow(() -> new RuntimeException("Graph not found with id: " + nodeId));
 
@@ -127,6 +127,7 @@ public class GraphService {
         Edge edge = Edge.builder()
                 .source(source)
                 .target(target)
+                .graph(graph)
                 .weight(createEdgeDto.getWeight())
                 .build();
 
@@ -136,7 +137,7 @@ public class GraphService {
 
     }
 
-    public void deleteEdge(Long graphId, Long edgeId) {
+    public void deleteEdge(Long edgeId) {
         Edge edge = edgeRepository.findById(edgeId)
                 .orElseThrow(() -> new RuntimeException("Edge not found with id: " + edgeId));
 
