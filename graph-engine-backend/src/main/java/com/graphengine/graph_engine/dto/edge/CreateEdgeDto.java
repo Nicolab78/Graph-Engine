@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateEdgeDto {
     private Long id;
+    private Long sourceId;
     private Long targetId;
     private Double weight;
 }

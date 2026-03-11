@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class UpdateGraphDto {
     private String name;
     private String description;
-    private boolean directed;
-    private boolean weighted;
+    private Boolean directed;
+    private Boolean weighted;
 }
