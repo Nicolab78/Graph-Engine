@@ -1,5 +1,8 @@
 package com.graphengine.graph_engine.service.impl;
 
+import com.graphengine.graph_engine.core.algorithm.traversal.BFS;
+import com.graphengine.graph_engine.core.algorithm.traversal.DFS;
+import com.graphengine.graph_engine.dto.algorithm.TraversalResultDto;
 import com.graphengine.graph_engine.dto.edge.CreateEdgeDto;
 import com.graphengine.graph_engine.dto.edge.EdgeDto;
 import com.graphengine.graph_engine.dto.graph.CreateGraphDto;
@@ -142,6 +145,56 @@ public class GraphService {
                 .orElseThrow(() -> new RuntimeException("Edge not found with id: " + edgeId));
 
         edgeRepository.deleteById(edgeId);
+    }
+
+    public TraversalResultDto bfs(Long graphId, Long startNodeId) {
+        long startTime = System.currentTimeMillis();
+
+        Graph graph = graphRepository.findById(graphId)
+                .orElseThrow(() -> new RuntimeException("Graph not found with id: " + graphId));
+
+        List<Long> visitedIds = BFS.traverse(graph, startNodeId);
+
+        List<String> visitedLabels = visitedIds.stream()
+                .map(id -> graph.getNodes().stream()
+                        .filter(n -> n.getId().equals(id))
+                        .findFirst()
+                        .map(Node::getLabel)
+                        .orElse(""))
+                .toList();
+
+        long executionTime = System.currentTimeMillis() - startTime;
+
+        return TraversalResultDto.builder()
+                .visitedNodeIds(visitedIds)
+                .visitedNodeLabels(visitedLabels)
+                .executionTimeMs(executionTime)
+                .build();
+    }
+
+    public TraversalResultDto dfs(Long graphId, Long startNodeId) {
+        long startTime = System.currentTimeMillis();
+
+        Graph graph = graphRepository.findById(graphId)
+                .orElseThrow(() -> new RuntimeException("Graph not found with id: " + graphId));
+
+        List<Long> visitedIds = DFS.traverse(graph, startNodeId);
+
+        List<String> visitedLabels = visitedIds.stream()
+                .map(id -> graph.getNodes().stream()
+                        .filter(n -> n.getId().equals(id))
+                        .findFirst()
+                        .map(Node::getLabel)
+                        .orElse(""))
+                .toList();
+
+        long executionTime = System.currentTimeMillis() - startTime;
+
+        return TraversalResultDto.builder()
+                .visitedNodeIds(visitedIds)
+                .visitedNodeLabels(visitedLabels)
+                .executionTimeMs(executionTime)
+                .build();
     }
 
 
