@@ -1,5 +1,6 @@
 package com.graphengine.graph_engine.controller;
 
+import com.graphengine.graph_engine.dto.algorithm.TraversalResultDto;
 import com.graphengine.graph_engine.dto.edge.CreateEdgeDto;
 import com.graphengine.graph_engine.dto.edge.EdgeDto;
 import com.graphengine.graph_engine.dto.graph.CreateGraphDto;
@@ -122,6 +123,26 @@ public class GraphController {
             return ResponseEntity.ok("Edge deleted successfully");
         } catch (RuntimeException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/{graphId}/bfs/{startNodeId}")
+    public ResponseEntity<?> bfs(@PathVariable Long graphId, @PathVariable Long startNodeId) {
+        try {
+            TraversalResultDto result = graphService.bfs(graphId, startNodeId);
+            return ResponseEntity.ok(result);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/{graphId}/dfs/{startNodeId}")
+    public ResponseEntity<?> dfs(@PathVariable Long graphId, @PathVariable Long startNodeId) {
+        try {
+            TraversalResultDto result = graphService.dfs(graphId, startNodeId);
+            return ResponseEntity.ok(result);
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
