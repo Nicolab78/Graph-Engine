@@ -2,7 +2,7 @@ package com.graphengine.graph_engine.service.impl;
 
 import com.graphengine.graph_engine.core.algorithm.traversal.BFS;
 import com.graphengine.graph_engine.core.algorithm.traversal.DFS;
-import com.graphengine.graph_engine.dto.algorithm.TraversalResultDto;
+import com.graphengine.graph_engine.dto.algorithms.TraversalResultDto;
 import com.graphengine.graph_engine.dto.edge.CreateEdgeDto;
 import com.graphengine.graph_engine.dto.edge.EdgeDto;
 import com.graphengine.graph_engine.dto.graph.CreateGraphDto;
