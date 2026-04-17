@@ -1,6 +1,6 @@
 package com.graphengine.graph_engine.controller;
 
-import com.graphengine.graph_engine.dto.algorithm.TraversalResultDto;
+import com.graphengine.graph_engine.dto.algorithms.TraversalResultDto;
 import com.graphengine.graph_engine.dto.edge.CreateEdgeDto;
 import com.graphengine.graph_engine.dto.edge.EdgeDto;
 import com.graphengine.graph_engine.dto.graph.CreateGraphDto;

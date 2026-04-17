@@ -1,4 +1,4 @@
-package com.graphengine.graph_engine.dto.algorithm;
+package com.graphengine.graph_engine.dto.algorithms;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
